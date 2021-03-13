@@ -93,11 +93,12 @@ Dependencies := rec(
   GAP := ">= 4.9",
   NeededOtherPackages := [ [ "AutoDoc", ">= 2018.02.14" ],
                            [ "Modules", ">= 0.5" ], 
-                           [ "CddInterface", ">= 2020.06.24" ],
-                           [ "NormalizInterface", ">= 1.1.0"  ]
                          ],
   SuggestedOtherPackages := [ [ "4ti2Interface", ">= 2018.07.06" ],
-                              [ "TopcomInterface", ">=2019.06.15" ] ],
+                              [ "TopcomInterface", ">=2019.06.15" ],
+                              [ "CddInterface", ">= 2020.06.24" ],
+                              [ "NormalizInterface", ">= 1.1.0"  ]
+                              ],
   ExternalConditions := [ ],
 ),
 
