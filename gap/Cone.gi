@@ -52,6 +52,7 @@ BindGlobal( "TheTypeInternalCone",
 #####################################
 
 ##
+if CddAvailable then
 InstallMethod( IsPointed,
                 "for homalg cones.",
                 [ IsCone ],
@@ -61,8 +62,10 @@ InstallMethod( IsPointed,
      return Cdd_IsPointed( ExternalCddCone ( cone ) );
      
 end );
+fi;
 
 ##
+if CddAvailable then
 InstallMethod( InteriorPoint,
                 [ IsConvexObject and IsCone ],
     function( cone )
@@ -75,6 +78,7 @@ InstallMethod( InteriorPoint,
         return Lcm( denominators )*point;
     fi;
 end );
+fi;
 
 ##
 InstallMethod( IsComplete,
@@ -186,6 +190,7 @@ end );
 ##
 #####################################
 
+if CddAvailable then
 InstallMethod( RayGenerators,
                [ IsCone ],
                
@@ -203,6 +208,7 @@ InstallMethod( RayGenerators,
 #   return Concatenation( r, l, -l );
 
   end );
+fi;
 
 ##
 InstallMethod( DualCone,
@@ -227,6 +233,7 @@ InstallMethod( DualCone,
 end );
 
 ##
+if CddAvailable then
 InstallMethod( DefiningInequalities,
                [ IsCone ],
                
@@ -258,7 +265,7 @@ new_inequalities:= [ ];
   return new_inequalities; 
     
 end );
-
+fi;
 
 ##
 InstallMethod( FactorConeEmbedding,
@@ -272,6 +279,7 @@ InstallMethod( FactorConeEmbedding,
 end );
 
 ##
+if CddAvailable then
 InstallMethod( EqualitiesOfCone,
                "for external Cone",
                [ IsCone ],
@@ -296,6 +304,7 @@ InstallMethod( EqualitiesOfCone,
   return new_equalities;
 
 end );
+fi;
 
 ##
 InstallMethod( RelativeInteriorRay,
@@ -455,6 +464,7 @@ InstallMethod( Dimension,
 end );
 
 ##
+if CddAvailable then
 InstallMethod( Dimension, 
                "for cones",
                [ IsCone ],
@@ -463,6 +473,7 @@ InstallMethod( Dimension,
   return Cdd_Dimension( ExternalCddCone( cone ) );
   
 end );
+fi;
 
 ##
 InstallMethod( HilbertBasis,
@@ -500,6 +511,7 @@ InstallMethod( HilbertBasis,
 end );
 
 ##
+if CddAvailable then
 InstallMethod( RaysInFacets,
                " for cones",
                [ IsCone ],
@@ -540,8 +552,10 @@ InstallMethod( RaysInFacets,
 return list;
     
 end );
+fi;
 
 ##
+if CddAvailable then
 InstallMethod( RaysInFaces,
                " for cones",
                [ IsCone ],
@@ -586,6 +600,7 @@ InstallMethod( RaysInFaces,
 return list;
 
 end );
+fi;
 
 ##
 InstallMethod( Facets,
@@ -666,6 +681,7 @@ InstallMethod( FacesOfCone,
 end );
 
 ##
+if CddAvailable then
 InstallMethod( FVector,
                "for cones",
                [ IsCone ],
@@ -679,8 +695,10 @@ InstallMethod( FVector,
     return List( [ 1 .. Dimension( cone ) ], 
                 i -> Length( PositionsProperty( faces, face -> face[ 1 ] = i ) ) );
   end );
+fi;
 
 ##
+if CddAvailable then
 InstallMethod( LinearSubspaceGenerators,
                [ IsCone ],
                
@@ -696,6 +714,7 @@ InstallMethod( LinearSubspaceGenerators,
   return  new_basis;
    
 end );
+fi;
 
 ##
 InstallMethod( LinealitySpaceGenerators,
@@ -1034,6 +1053,7 @@ InstallMethod( IntersectionOfCones,
 end );
 
 ##
+if CddAvailable then
 InstallMethod( IntersectionOfCones,
                "for homalg cones",
                [ IsCone, IsCone ],
@@ -1056,6 +1076,7 @@ InstallMethod( IntersectionOfCones,
     return cone;
     
 end );
+fi;
 
 ##
 InstallMethod( IntersectionOfCones,
@@ -1269,6 +1290,7 @@ end );
 ##
 #######################################
 
+if CddAvailable then
 InstallMethod( ExternalCddCone, 
                [ IsCone ], 
                
@@ -1345,7 +1367,7 @@ InstallMethod( ExternalCddCone,
    fi;
    
 end );
-   
+fi;
       
 InstallMethod( ExternalNmzCone, 
               [ IsCone ],
@@ -1546,6 +1568,7 @@ InstallMethod( Cone,
 
     );
    
+if CddAvailable then
 InstallMethod( Cone, 
               "Construct cone from Cdd cone",
               [ IsCddPolyhedron ],
@@ -1600,6 +1623,7 @@ InstallMethod( Cone,
     
 end );
    
+fi;
 
 
 ################################

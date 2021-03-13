@@ -4,6 +4,8 @@
 # Declarations
 #
 
+CddAvailable := false;
+NormalizAvailable := false;
 
 DeclareCategory( "IsCone",
                  IsFan );
@@ -50,8 +52,10 @@ DeclareOperation( "Cone",
 #! @Returns a <C>Cone</C> Object
 #! @Description  
 #! This function takes a cone defined in **CddInterface** and converts it to a cone in **NConvex**
+if CddAvailable then
 DeclareOperation( "Cone",
                   [ IsCddPolyhedron ] );
+fi;
 
 ##############################
 ##
