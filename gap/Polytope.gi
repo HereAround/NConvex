@@ -56,6 +56,7 @@ BindGlobal( "TheTypeInternalPolytope",
 ####################################
 
 ##
+if CddAvailable then
 InstallMethod( IsEmpty,
                "for polytopes",
                [ IsPolytope ],
@@ -77,6 +78,7 @@ InstallMethod( IsEmpty,
     fi;
     
 end );
+fi;
 
 ##
 InstallMethod( IsNotEmpty,
@@ -233,11 +235,13 @@ InstallMethod( IsSimplexPolytope,
 end );
 
 ##
+if CddAvailable then
 InstallMethod( InteriorPoint,
                 [ IsConvexObject and IsPolytope ],
     function( poly )
     return Cdd_InteriorPoint( ExternalCddPolytope( poly ) );
 end );
+fi;
 
 ##
 InstallMethod( IsSimplicial,
@@ -266,6 +270,7 @@ InstallMethod( IsSimplicial,
 end );
   
 ##
+if CddAvailable then
 InstallMethod( IsBounded,
                " for external polytopes.",
                [ IsPolytope ],
@@ -275,6 +280,7 @@ InstallMethod( IsBounded,
   return Length( Cdd_GeneratingRays( ExternalCddPolytope( polytope ) ) ) = 0;
   
 end );
+fi;
 
 ##
 InstallMethod( IsFullDimensional,
@@ -469,6 +475,7 @@ end );
 ####################################
 
 ##
+if CddAvailable then
 InstallMethod( ExternalCddPolytope, 
                "for polytopes", 
                [ IsPolytope ],
@@ -513,8 +520,10 @@ InstallMethod( ExternalCddPolytope,
    fi;
    
 end );
+fi;
 
 ##
+if CddAvailable then
 InstallMethod( Dimension, 
                "for polytopes",
                [ IsPolytope ],
@@ -522,7 +531,7 @@ function( polytope )
 
 return Cdd_Dimension( ExternalCddPolytope( polytope ) );
 end );
-
+fi;
 
 ##
 InstallMethod( LatticePointsGenerators,
@@ -663,6 +672,7 @@ end );
 
 
 ##
+if CddAvailable then
 InstallMethod( VerticesOfPolytope,
                "for polytopes",
                [ IsPolytope ],
@@ -672,6 +682,7 @@ InstallMethod( VerticesOfPolytope,
     return Cdd_GeneratingVertices( ExternalCddPolytope( polyt ) );
     
 end );
+fi;
 
 ##
 InstallMethod( Vertices,
@@ -692,6 +703,7 @@ InstallMethod( HasVertices,
 );
 
 ##
+if CddAvailable then
 InstallMethod( FacetInequalities,
                " for external polytopes",
                [ IsExternalPolytopeRep ],
@@ -701,8 +713,10 @@ InstallMethod( FacetInequalities,
     return Cdd_Inequalities( ExternalCddPolytope( polyt ) );
     
 end );
+fi;
 
 ##
+if CddAvailable then
 InstallMethod( EqualitiesOfPolytope,
                "for external polytopes",
                [ IsPolytope ],
@@ -712,6 +726,7 @@ InstallMethod( EqualitiesOfPolytope,
     return Cdd_Equalities( ExternalCddPolytope( polyt ) );
     
 end );
+fi;
 
 ##
 InstallMethod( DefiningInequalities,
@@ -907,6 +922,7 @@ end );
 InstallMethod( DualPolytope, [ IsPolytope ], PolarPolytope );
 
 ##
+if CddAvailable then
 InstallMethod( FVector,
         "for polytopes",
         [ IsPolytope ],
@@ -921,6 +937,7 @@ InstallMethod( FVector,
                 i -> Length( PositionsProperty( faces, face -> face[ 1 ] = i ) ) );
 
 end );
+fi;
 
 ####################################
 ##
@@ -1114,6 +1131,7 @@ InstallMethod( FreeSumOfPolytopes,
 end );
 
 ##
+if CddAvailable then
 InstallMethod( IntersectionOfPolytopes,
                "for homalg cones",
                [ IsPolytope, IsPolytope ],
@@ -1140,6 +1158,7 @@ InstallMethod( IntersectionOfPolytopes,
     return polyt;
     
 end );
+fi;
 
 ##
 InstallMethod( FourierProjection,
