@@ -52,6 +52,7 @@ InstallMethod( ContainingGrid,
 end );
 
 ##
+if CddAvailable then
 InstallMethod( ExternalCddPolyhedron,
                "for polyhedrons",
                [ IsPolyhedron and HasMainRatPolytope and HasTailCone ],
@@ -74,8 +75,10 @@ InstallMethod( ExternalCddPolyhedron,
     return polyhedron;
     
 end );
+fi;
 
 ##
+if CddAvailable then
 InstallMethod( ExternalCddPolyhedron,
                "for polyhedrons",
                [ IsPolyhedron and HasHomogeneousPointsOfPolyhedron ],
@@ -85,15 +88,19 @@ InstallMethod( ExternalCddPolyhedron,
     return Cdd_PolyhedronByGenerators( HomogeneousPointsOfPolyhedron( polyhedron ) );
     
 end );
+fi;
 
 ##
+if CddAvailable then
 InstallMethod( InteriorPoint,
                 [ IsConvexObject and IsPolyhedron ],
     function( poly )
     return Cdd_InteriorPoint( ExternalCddPolyhedron( poly ) );
 end );
+fi;
 
 ##
+if CddAvailable then
 InstallMethod( DefiningInequalities, 
                " for polyhedrons",
                [ IsPolyhedron ], 
@@ -111,9 +118,10 @@ InstallMethod( DefiningInequalities,
    return d;
  
 end );
-   
+fi;
 
 ##
+if CddAvailable then
 InstallMethod( ExternalCddPolyhedron,
                "for polyhedrons with inequalities",
                [ IsPolyhedron ],
@@ -135,6 +143,7 @@ InstallMethod( ExternalCddPolyhedron,
     TryNextMethod();
     
 end );
+fi;
 
 InstallMethod( ExternalNmzPolyhedron, 
                [ IsPolyhedron ], 
@@ -168,7 +177,7 @@ return ValueGlobal( "NmzCone" )( [ "inhom_inequalities", new_ineq ] );
 end );
                         
                         
-
+if CddAvailable then
 InstallMethod( Dimension, 
                [ IsPolyhedron ], 
    function( polyhedron )
@@ -176,6 +185,7 @@ InstallMethod( Dimension,
    return Cdd_Dimension( ExternalCddPolyhedron( polyhedron ) );
    
 end );
+fi;
 
 InstallMethod( MainRatPolytope, 
                "for polyhedrons",
@@ -226,6 +236,7 @@ InstallMethod( VerticesOfMainPolytope,
 end );
 
 ##
+if CddAvailable then
 InstallMethod( VerticesOfMainRatPolytope,
                "for polyhedrons",
                [ IsPolyhedron ],
@@ -255,6 +266,7 @@ InstallMethod( VerticesOfMainRatPolytope,
     fi;
     
 end );
+fi;
 
 InstallMethod( TailCone,
                "for polyhedrons",
@@ -276,6 +288,7 @@ InstallMethod( TailCone,
 end );
 
 ##
+if CddAvailable then
 InstallMethod( RayGeneratorsOfTailCone,
                "for polyhedrons",
                [ IsPolyhedron ],
@@ -293,6 +306,7 @@ InstallMethod( RayGeneratorsOfTailCone,
      fi;
     
 end );
+fi;
 
 ##
 InstallMethod( HomogeneousPointsOfPolyhedron,
@@ -404,6 +418,7 @@ InstallMethod( BasisOfLinealitySpace,
 end );
 
 ##
+if CddAvailable then
 InstallMethod( FVector,
             [ IsPolyhedron ],
     function( polyhedron )
@@ -417,6 +432,7 @@ InstallMethod( FVector,
                 i -> Length( PositionsProperty( faces, face -> face[ 1 ] = i ) ) );
 
 end );
+fi;
 
 #####################################
 ##
@@ -425,6 +441,7 @@ end );
 #####################################
 
 ##
+if CddAvailable then
 InstallMethod( IsBounded,
                " for external polytopes.",
                [ IsPolyhedron ],
@@ -434,8 +451,10 @@ InstallMethod( IsBounded,
   return Length( Cdd_GeneratingRays( ExternalCddPolyhedron( polyhedron ) ) ) = 0;
   
 end );
+fi;
 
 ##
+if CddAvailable then
 InstallMethod( IsNotEmpty,
                " for external polytopes.",
                [ IsPolyhedron ],
@@ -445,6 +464,7 @@ InstallMethod( IsNotEmpty,
   return not Cdd_IsEmpty( ExternalCddPolyhedron( polyhedron ) );
   
 end );
+fi;
 
 InstallMethod( IsPointed,
                [ IsPolyhedron ], 
@@ -624,6 +644,7 @@ end );
 
 ## Solving linear programs
 ##
+if CddAvailable then
 BindGlobal( "SOLVE_LINEAR_PROGRAM_USING_CDD",
   function( P, max_or_min, target_func, constructor )
     local ext_cdd_poly, cdd_linear_program; 
@@ -635,8 +656,10 @@ BindGlobal( "SOLVE_LINEAR_PROGRAM_USING_CDD",
     return Cdd_SolveLinearProgram( cdd_linear_program );
 
 end );
+fi;
 
 ##
+if CddAvailable then
 InstallMethod( SolveLinearProgram,
   [ IsPolyhedron, IsString, IsList ],
   function( P, max_or_min, target_func )
@@ -644,8 +667,10 @@ InstallMethod( SolveLinearProgram,
     return SOLVE_LINEAR_PROGRAM_USING_CDD( P, max_or_min, target_func, ExternalCddPolyhedron );
 
 end );
+fi;
 
 ##
+if CddAvailable then
 InstallMethod( SolveLinearProgram,
   [ IsPolytope, IsString, IsList ],
   function( P, max_or_min, target_func )
@@ -653,7 +678,8 @@ InstallMethod( SolveLinearProgram,
     return SOLVE_LINEAR_PROGRAM_USING_CDD( P, max_or_min, target_func, ExternalCddPolytope );
 
 end );
- 
+fi;
+
 ##############################
 ##
 ## View & Display
